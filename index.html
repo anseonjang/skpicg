@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 1. wow.js세팅/푸터영역코딩완료/하단화살표와 로고클릭시 최상단스크립트완료 / 앵커링크시 스크롤애니메이션 넣기 -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 이름 - skpicglobalResponsive </title>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <!-- 스와이퍼슬라이드 -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
+
+    <script src="./js/jquery-1.11.3.min.js"></script>
+    <script>
+        $(function () {
+
+
+            // 메뉴 클릭 시 스크롤 애니메이션
+            $("ul.menu li a[href^='#']").on('click', function (e) {
+                // 기본 클릭 이벤트를 막아서 페이지의 새로고침을 방지
+                e.preventDefault();
+
+                // 클릭한 메뉴 항목의 href 속성 값을 가져옴 (예: #about)
+                var target = $(this).attr('href');
+
+                // 해당 섹션의 상단 위치를 계산하여 가져옴
+                var targetPosition = $(target).offset().top;
+
+                // 스크롤 애니메이션을 설정하고 실행
+                $('html, body').animate({
+                    // 스크롤 위치를 클릭한 메뉴 항목의 연결된 섹션 상단으로 이동시킴
+                    scrollTop: targetPosition
+                }, 800); // 800ms 동안 애니메이션을 실행 (원하는 지속 시간으로 변경 가능)
+            });
+
+
+
+
+// tab menu
+   
+
+    'use strict'; // 엄격모드 활성화
+
+    // 함수를 만들어서 메뉴를 업데이트하는 코드
+    function updateMenu() {
+        // 현재 화면 크기에 따라 메뉴와 컨텐츠를 표시
+        if ($(window).width() <= 768) { // 예시: 768px 이하일 때 메뉴와 컨텐츠를 함께 표시
+            $(".info-list li").removeClass("selected"); // 모든 메뉴 선택 해제
+            $(".info-content div").hide(); // 모든 컨텐츠 숨김
+        } else {
+            // 초기 상태: 첫 번째 메뉴와 해당 컨텐츠를 선택
+            $(".info-list li:first-child").addClass("selected");
+            $("." + $(".info-list li:first-child").data("class")).show();
+        }
+    }
+
+    // 페이지 로드 시 메뉴 업데이트
+    updateMenu();
+
+    // 창 크기 변경 시 메뉴 업데이트
+    $(window).resize(function () {
+        updateMenu();
+    });
+
+    // 메뉴 클릭 이벤트 핸들러
+    $(".info-list li").click(function () {
+        // 화면 크기가 768px 이하일 때만 동작하도록 설정
+        if ($(window).width() <= 768) {
+            // 메뉴를 클릭했을 때 해당 컨텐츠를 토글
+            $("." + $(this).data("class")).toggle();
+        } else {
+            // 화면 크기가 768px 초과일 때 기존 코드 실행
+            $(this).addClass("selected").siblings("li").removeClass("selected");
+            $(".info-content div").hide();
+            $("." + $(this).data("class")).fadeIn();
+        }
+    });
+
+// 토글
+var $menu = $('.menu');
+var $toggleBtn = $('.toggleBtn');
+var menuVisible = false; // 메뉴의 표시 여부를 추적하는 변수
+
+$toggleBtn.click(function(e) {
+    e.stopPropagation(); // 버튼 클릭 이벤트가 상위로 전파되는 것을 방지
+    menuVisible = !menuVisible; // 메뉴의 표시 여부를 반전
+    if (menuVisible) {
+        $menu.show(); // 메뉴를 표시
+    } else {
+        $menu.hide(); // 메뉴를 숨김
+    }
+});
+
+$(document).click(function(e) {
+    if (menuVisible && !$(e.target).closest('.menu').length) {
+        $menu.hide(); // 메뉴가 표시된 상태에서 메뉴 영역 외부를 클릭하면 메뉴를 숨김
+        menuVisible = false; // 메뉴가 숨겨짐
+    }
+});
+
+$menu.click(function(e) {
+    e.stopPropagation(); // 메뉴 클릭 이벤트가 상위로 전파되는 것을 방지
+});
+
+
+
+
+        // .btn_top을 500px 도달시 나타남
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 500) {
+                $(".topBtn").fadeIn();
+                // 안보이던 화살표 버튼이 500px 이상으로 스크롤이 내려오면 나타남
+            } else {
+                $(".topBtn").fadeOut(); // 500px 이하일 경우 사라짐
+            }
+        });
+
+        // .logo와 .btn_top 클릭시 최상단으로 가게 하기
+        // 로고와 화살표를 클릭했을때 최상단(TOP:0)으로 위치 
+        $(".logo, .topBtn").on("click", function () {
+        $("html,body").animate({
+            scrollTop: 0
+        }, 400); //0.4초
+        });
+
+
+        });
+    </script>
+
+</head>
+
+<body>
+    <!-- #wrap>header>.innerHeader>h1.logo>a>img -->
+    <div id="wrap">
+        <!-- ===============================
+            header 
+================================-->
+        <header>
+            <div class="innerHeader">
+                <div class="navbar">
+                    <!-- logo -->
+                    <h1 class="logo"><a href="#"><img src="./images/logo_w.svg" alt="로고"></a></h1>
+                    <!-- menu -->
+                    <!-- ul.menu>li*3>a{About} -->
+                    <ul class="menu">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#career">Career</a></li>
+                        <li><a href="#products">Products</a></li>
+                    </ul>
+                    <!-- toggleBtn -->
+                    <!-- a>img -->
+                    <a href="#" class="toggleBtn">
+                        <img src="./images/toggle-right.svg" alt="토글버튼" >
+                    </a>
+                </div>
+            </div>
+        </header>
+        <!-- ===============================
+            mainImg
+================================-->
+        <main>
+            <!-- section#mainImg>.mainText>.title+.ciDown -->
+
+            <section id="mainImg">
+                <div class="mainText">
+                    <div class="title">
+                        <h2>
+                            SK Picglobal이 이뤄낸 기술 변화가
+                        </h2>
+                        <p>
+                            세상을 바꿉니다.
+                        </p>
+                    </div>
+                    <div class="ciDown">
+                        <h3>Download CI</h3>
+                        <p>
+                            Download the CI of SK Picglobal.
+                        </p>
+                        <div class="btn">
+                            <a href="./down/SK-picglobal-CI.zip" class="downBtn"></a>
+
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ===============================
+            about - 애니메이션사이트 :https://animate.style/
+================================-->
+            <!-- section#about>.aboutInner>h3+ul>li*3>a>img -->
+            <section id="about">
+                <div class="aboutInner">
+                    <h3>About <span></span></h3>
+                    <ul class="wow animate__animated animate__fadeInRight">
+                        <li><a href="#"><img src="./images/photo1.png" alt="이미지1"></a></li>
+                        <li><a href="#"><img src="./images/photo2.png" alt="이미지2"></a></li>
+                        <li><a href="#"><img src="./images/photo3.png" alt="이미지3"></a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ===============================
+            career
+================================-->
+            <!-- section#career>.careerInner>h3+.redBox -->
+            <section id="career">
+                <div class="careerInner">
+                    <h3>Career<span></span></h3>
+                    <div class="redBox wow animate__animated animate__fadeInLeft">
+                        <!-- .tTEXT+.bottomW -->
+                        <div class="tTEXT">
+                            <p class="top">SK Picglobal 에서</p>
+                            <span>꿈을 펼칠 당신을 기다립니다.
+                            </span>
+                        </div>
+                        <div class="bottomW">
+                            <a href="https://www.skc.kr/kor/career/skcfamily_recruit.do"
+                                    target="_blank">
+                                    <span>채용사이트</span>
+                                    <img
+                                    src="./images/arrow-narrow-right.svg" alt="오른쪽 화살표">
+                                </a>
+
+                           
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===============================
+            products
+================================-->
+            <!-- section#products>.productsInner>h3>span -->
+            <section id="products">
+                <div class="productsInner">
+                    <h3>Products<span></span></h3>
+                    <!-- .information>.cotainer>h4.h4.text-center+ul.classic-list.info-list -->
+                    <div class="information wow animate__animated animate__fadeInRight">
+                        <div class="cotainer">
+                            <h4 class="h4 text-center"></h4>
+                            <!-- tab -->
+                            <ul class="classic-list info-list">
+                                <!-- li*5>a{Title} -->
+                                <!-- data-class 속성을 추가하는 것은, 
+                                데이터를 저장하고 
+                                전달하기 위한 방법 중 하나이며,                               
+                                자바스크립트를 사용하여 이러한 데이터를 읽거나 수정 가능, 
+                                리스트를 동적으로 조작 가능 / 프로그래밍적으로 제어 가능 -->
+                                <li data-class="Title1" class="selected">
+                                    <a href="#">
+                                        Title1</a></li>
+                                <li data-class="Title2"><a href="#">Title2</a></li>
+                                <li data-class="Title3"><a href="#">Title3</a></li>
+                                <li data-class="Title4"><a href="#">Title4</a></li>
+                                <li data-class="Title5"><a href="#">Title5</a></li>
+                            </ul>
+                            <!-- contents -->
+                            <!-- .info-content>.Title1>img+p -->
+                            <div class="info-content">
+                                <!-- 1 -->
+                                <div class="Title1">
+                                    <img src="./images/product01_active.jpg" alt="이미지1">
+                                    <p>
+                                        About Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.About Lorem ipsum
+                                        dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                        ut
+                                        labore et dolore magna aliqua.About Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                                        aliqua.About Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                        eiusmod tempor incididunt ut labore et dolore magna aliqua.About Lorem ipsum
+                                        dolor
+                                        sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                                        labore
+                                        et dolore magna aliqua.About Lorem ipsum dolor sit amet, consectetur adipisicing
+                                        elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.About
+                                        Lorem
+                                        ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                        incididunt
+                                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                        exercitation
+                                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                                        in
+                                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                        deserunt
+                                        mollit anim id est laborum.About Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing elit, sed
+                                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.About Lorem ipsum
+                                        dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                        ut
+                                        labore et dolore magna aliqua.About Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                                        aliqua.About Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                        eiusmod tempor incididunt ut labore et dolore magna aliqua.About Lorem ipsum
+                                        dolor
+                                        sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                                        labore
+                                        et dolore magna aliqua.About Lorem ipsum dolor sit amet, consectetur adipisicing
+                                        elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    </p>
+                                </div>
+
+
+                                <!-- 2 -->
+                                <div class="Title2">
+                                    <img src="./images/product01_active.jpg" alt="이미지2">
+                                    <p>
+                                        About Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.About Lorem ipsum
+                                        dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                        ut
+                                        labore et dolore magna aliqua.About Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                                        aliqua.About Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                        eiusmod tempor incididunt ut labore et dolore magna aliqua.About Lorem ipsum
+                                        dolor
+                                        sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                                        labore
+                                        et dolore magna aliqua.About Lorem ipsum dolor sit amet, consectetur adipisicing
+                                        elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.About
+                                        Lorem
+                                        ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                        incididunt
+                                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                        exercitation
+                                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                                        in
+                                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                        deserunt
+                                        mollit anim id est laborum.About Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing elit, sed
+                                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.About Lorem ipsum
+                                        dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                        ut
+                                        labore et dolore magna aliqua.About Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                                        aliqua.About Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                        eiusmod tempor incididunt ut labore et dolore magna aliqua.About Lorem ipsum
+                                        dolor
+                                        sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                                        labore
+                                        et dolore magna aliqua.About Lorem ipsum dolor sit amet, consectetur adipisicing
+                                        elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    </p>
+                                </div>
+
+                                <!-- 3 -->
+                                <div class="Title3">
+                                    <img src="./images/product01_active.jpg" alt="이미지3">
+                                    <p>
+                                        About Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.About Lorem ipsum
+                                        dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                        ut
+                                        labore et dolore magna aliqua.About Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                                        aliqua.About Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                        eiusmod tempor incididunt ut labore et dolore magna aliqua.About Lorem ipsum
+                                        dolor
+                                        sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                                        labore
+                                        et dolore magna aliqua.About Lorem ipsum dolor sit amet, consectetur adipisicing
+                                        elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.About
+                                        Lorem
+                                        ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                        incididunt
+                                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                        exercitation
+                                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                                        in
+                                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                        deserunt
+                                        mollit anim id est laborum.About Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing elit, sed
+                                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.About Lorem ipsum
+                                        dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                        ut
+                                        labore et dolore magna aliqua.About Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                                        aliqua.About Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                        eiusmod tempor incididunt ut labore et dolore magna aliqua.About Lorem ipsum
+                                        dolor
+                                        sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                                        labore
+                                        et dolore magna aliqua.About Lorem ipsum dolor sit amet, consectetur adipisicing
+                                        elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    </p>
+                                </div>
+
+
+                                <!-- 4 -->
+                                <div class="Title4">
+                                    <img src="./images/product01_active.jpg" alt="이미지4">
+                                    <p>
+                                        About Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.About Lorem ipsum
+                                        dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                        ut
+                                        labore et dolore magna aliqua.About Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                                        aliqua.About Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                        eiusmod tempor incididunt ut labore et dolore magna aliqua.About Lorem ipsum
+                                        dolor
+                                        sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                                        labore
+                                        et dolore magna aliqua.About Lorem ipsum dolor sit amet, consectetur adipisicing
+                                        elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.About
+                                        Lorem
+                                        ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                        incididunt
+                                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                        exercitation
+                                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                                        in
+                                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                        deserunt
+                                        mollit anim id est laborum.About Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing elit, sed
+                                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.About Lorem ipsum
+                                        dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                        ut
+                                        labore et dolore magna aliqua.About Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                                        aliqua.About Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                        eiusmod tempor incididunt ut labore et dolore magna aliqua.About Lorem ipsum
+                                        dolor
+                                        sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                                        labore
+                                        et dolore magna aliqua.About Lorem ipsum dolor sit amet, consectetur adipisicing
+                                        elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.About
+                                        Lorem
+                                        ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                        incididunt
+                                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                        exercitation
+                                        ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </p>
+                                </div>
+
+
+                                <!-- 5-->
+                                <div class="Title5">
+                                    <img src="./images/product01_active.jpg" alt="이미지5">
+                                    <p>
+                                        About Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.About Lorem ipsum
+                                        dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                        ut
+                                        labore et dolore magna aliqua.About Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                                        aliqua.About Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                        eiusmod tempor incididunt ut labore et dolore magna aliqua.About Lorem ipsum
+                                        dolor
+                                        sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                                        labore
+                                        et dolore magna aliqua.About Lorem ipsum dolor sit amet, consectetur adipisicing
+                                        elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.About
+                                        Lorem
+                                        ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                        incididunt
+                                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                        exercitation
+                                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                                        in
+                                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                        deserunt
+                                        mollit anim id est laborum.About Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing elit, sed
+                                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.About Lorem ipsum
+                                        dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                        ut
+                                        labore et dolore magna aliqua.About Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                                        aliqua.About Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                        eiusmod tempor incididunt ut labore et dolore magna aliqua.About Lorem ipsum
+                                        dolor
+                                        sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                                        labore
+                                        et dolore magna aliqua.About Lorem ipsum dolor sit amet, consectetur adipisicing
+                                        elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        <!-- ===============================
+            footer
+================================-->
+        <footer>
+            <p>ⓒName 2023. All rights reserved. </p>
+            <ul class="sns">
+
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+            </ul>
+        </footer>
+
+    </div>
+    <a href="#"><img src="./images/topBtn.svg" alt="클릭시 최상단 화살표" class="topBtn"></a>
+    <!-- 하단화살표 -->
+    <!-- a.topBtn>img -->
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+
+
+</body>
+
+</html>
